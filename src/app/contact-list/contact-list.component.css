@@ -1,0 +1,14 @@
+.contactList .panel-primary > .panel-heading {
+  background-color: #017cad;
+  border-color: #017cad;
+}
+
+.contactList .glyphicon-pencil,
+.contactList .glyphicon-trash {
+  cursor: pointer;
+}
+
+.contactList .data-edit {
+  margin-right: 10px;
+  display: inline-block;
+}

@@ -1,0 +1,15 @@
+.contactForm .resetContactFormButton {
+  display: inline-block;
+  position: absolute;
+  bottom: 0px;
+  right: 1%;
+}
+
+input.ng-invalid.ng-touched {
+  border: 2px solid red;
+}
+
+.showError {
+  color: red;
+  font-weight: 600;
+}

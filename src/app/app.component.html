@@ -1,0 +1,11 @@
+<app-header></app-header>
+<router-outlet></router-outlet>
+<div
+  class="container notificationPanel"
+  [ngClass]="{
+    success: notificationType == 'success',
+    error: notificationType == 'error'
+  }"
+>
+  <p class="noMargin">{{ notificationMessage }}</p>
+</div>

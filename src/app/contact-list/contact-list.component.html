@@ -1,0 +1,120 @@
+<div class="container contactList">
+  <div class="row">
+    <div class="panel panel-primary">
+      <div class="panel-heading  text-center-align">Contact List</div>
+      <div class="panel-body">
+        <div
+          class="table-responsive"
+          *ngIf="contactList.length > 0; else noDataFound"
+        >
+          <table
+            class="table fontAdjust table-striped table-hover table-responsive .table-condensed"
+          >
+            <thead>
+              <tr>
+                <td>Filter</td>
+                <td>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="firstName"
+                    placeholder="First Name"
+                    [(ngModel)]="contactListModel.firstName"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="lastName"
+                    placeholder="Last Name"
+                    [(ngModel)]="contactListModel.lastName"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="phoneNumber"
+                    placeholder="Phone Number"
+                    [(ngModel)]="contactListModel.phoneNumber"
+                  />
+                </td>
+
+                <td>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="email"
+                    placeholder="e-mail"
+                    [(ngModel)]="contactListModel.email"
+                  />
+                </td>
+
+                <td>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="status"
+                    placeholder="Status"
+                    [(ngModel)]="contactListModel.status"
+                  />
+                </td>
+                <td>
+                  <button class="btn btn-primary" (click)="clearFilter()">
+                    Clear
+                  </button>
+                </td>
+              </tr>
+
+              <tr>
+                <td>S No.</td>
+                <td>First Name</td>
+                <td>Last Name</td>
+                <td>Contact</td>
+                <td>E-mail</td>
+                <td>Status</td>
+                <td>Action</td>
+              </tr>
+            </thead>
+            <tbody class="table-striped">
+              <tr
+                *ngFor="
+                  let contact of contactList
+                    | contactFilter: 'status':contactListModel.status
+                    | contactFilter: 'firstName':contactListModel.firstName
+                    | contactFilter: 'lastName':contactListModel.lastName
+                    | contactFilter: 'email':contactListModel.email
+                    | contactFilter: 'phoneNumber':contactListModel.phoneNumber;
+                  let i = index
+                "
+              >
+                <td>{{ i + 1 }}</td>
+                <td>{{ contact.firstName }}</td>
+                <td>{{ contact.lastName }}</td>
+                <td>{{ contact.phoneNumber }}</td>
+                <td>{{ contact.email }}</td>
+                <td>{{ contact.status }}</td>
+                <td>
+                  <span
+                    class="glyphicon glyphicon-pencil data-edit"
+                    title="Edit"
+                    (click)="editContact(contact, i)"
+                  ></span>
+                  <span
+                    class="glyphicon glyphicon-trash has-error"
+                    title="Delete"
+                    (click)="deleteContact(i)"
+                  ></span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <ng-template #noDataFound>
+          <div>No data available , Please add contact details</div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
