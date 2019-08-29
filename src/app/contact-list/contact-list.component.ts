@@ -17,6 +17,7 @@ export class ContactListComponent implements OnInit {
 
   ngOnInit() {
     this.contactList = this.contactServiceService.contactList;
+    this.contactServiceService.changeCurrentAddOrEdit("Add Contact");
   }
 
   clearFilter() {

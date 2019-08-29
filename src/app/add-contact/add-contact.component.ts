@@ -14,6 +14,7 @@ export class AddContactComponent implements OnInit {
   contactList = [];
   submitOrUpdate = "Add";
   currentComponentType = "Add Contact";
+  ResetOrCancel = "Reset";
   contactToEdit: any = {};
   editIndex = -1;
   constructor(
@@ -25,6 +26,7 @@ export class AddContactComponent implements OnInit {
     if (this.router.url.includes("edit-contact")) {
       this.currentComponentType = "Edit Contact";
       this.submitOrUpdate = "Update";
+      this.ResetOrCancel = "Cancel Update";
       this.contactToEdit = this.contactServiceService.contactToEdit;
       this.editIndex = this.contactServiceService.editIndex;
       this.defaultOrEditStatus = this.contactToEdit["status"];
@@ -45,18 +47,19 @@ export class AddContactComponent implements OnInit {
       this.contactServiceService.contactList.push(
         this.contactFormData.form.value
       );
-    }
-    localStorage.setItem(
-      "contactListSaved",
-      JSON.stringify(this.contactServiceService.contactList)
-    );
-    this.contactServiceService.changeNotification({
-      notificationType: "success",
-      notificationMessage: "Success ! Contact Added Successfully "
-    });
 
-    this.resetContactForm();
-    this.router.navigateByUrl("/contact-list");
+      localStorage.setItem(
+        "contactListSaved",
+        JSON.stringify(this.contactServiceService.contactList)
+      );
+      this.contactServiceService.changeNotification({
+        notificationType: "success",
+        notificationMessage: "Success ! Contact Added Successfully "
+      });
+
+      this.resetContactForm();
+      this.router.navigateByUrl("/contact-list");
+    }
   }
 
   updateContacts() {
@@ -83,7 +86,14 @@ export class AddContactComponent implements OnInit {
   }
 
   resetContactForm() {
-    this.contactFormData.reset();
+    if (this.ResetOrCancel == "Reset") {
+      this.contactFormData.reset();
+    } else {
+      this.contactServiceService.changeCurrentAddOrEdit("Add Contact");
+      this.submitOrUpdate = "Add";
+      this.ResetOrCancel = "Reset";
+      this.router.navigateByUrl("/contact-list");
+    }
   }
 
   validateContact(contact): boolean {

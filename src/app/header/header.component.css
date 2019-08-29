@@ -16,6 +16,10 @@
   color: white;
 }
 
+.displayAdd {
+  display: none;
+}
+
 .header .nav > li > a:focus,
 .header .nav > li > a:hover {
   color: #017cad;

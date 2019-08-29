@@ -4,13 +4,22 @@
       <a class="navbar-brand" href="#">Contacts</a>
     </div>
     <ul class="nav navbar-nav">
-      <li>
+      <li [ngClass]="{ displayAdd: addOrEdit == 'Edit Contact' }">
         <a routerLink="/add-contact" routerLinkActive="active" class="active">{{
           addOrEdit
         }}</a>
       </li>
       <li>
-        <a routerLink="/contact-list">Contact List</a>
+        <a
+          routerLink="/add-contact"
+          routerLinkActive="active"
+          *ngIf="addOrEdit == 'Edit Contact'"
+          class="active"
+          >{{ addOrEdit }}</a
+        >
+      </li>
+      <li>
+        <a routerLink="/contact-list" routerLinkActive="active">Contact List</a>
       </li>
     </ul>
   </div>
